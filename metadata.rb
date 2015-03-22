@@ -1,0 +1,7 @@
+name             'helloworld'
+maintainer       'YOUR_NAME'
+maintainer_email 'YOUR_EMAIL'
+license          'All rights reserved'
+description      'Installs/Configures helloworld'
+long_description 'Installs/Configures helloworld'
+version          '0.1.0'
