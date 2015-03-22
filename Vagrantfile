@@ -7,7 +7,7 @@ VAGRANTFILE_API_VERSION = '2'
 Vagrant.require_version '>= 1.5.0'
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.trigger.after [:reload, :halt], stdout: true do
+  config.trigger.before [:reload, :halt], stdout: true do
     `rm .vagrant/machines/default/virtualbox/synced_folders`
   end
 
