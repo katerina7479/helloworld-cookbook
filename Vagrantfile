@@ -79,7 +79,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     chef.json = {
       app: {
         sites: [
-            { name: 'test' }
+            { name: 'test',
+              variables: {
+                port: 80,
+                hostname: 'localhost',
+                root: '/vagrant/'
+              }
+            }
         ]
       }
     }

@@ -1,0 +1,11 @@
+server {
+  listen   <%= @port -%>;
+  server_name  <%= @hostname %>;
+
+  access_log /var/log/nginx/localhost.access.log;
+
+  location / {
+    root   <%= @root %>;
+    index  index.html index.htm;
+  }
+}
