@@ -31,6 +31,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # config.vm.box_url doesn't need to be specified.
   config.vm.box = 'chef/ubuntu-14.04'
 
+  config.vm.provider "lxc" do |lxc, override|
+      override.vm.box = "fgrehm/trusty64-lxc"
+  end
+
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
