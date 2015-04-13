@@ -38,6 +38,6 @@
   "run_list": [
 	  "recipe[python]",
 	  "recipe[helloworld::python_envs]",
-	  "recipe[helloworld::upstarts]"
+	  "recipe[helloworld::upstartss]"
   ]
 }

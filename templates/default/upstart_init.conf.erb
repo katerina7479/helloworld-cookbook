@@ -7,7 +7,7 @@ chdir <%= @app_path %>
 
 script
 /bin/bash <<'EOT'
-  source <%= @virtual_env_path -%>/bin/activate
+  source /home/<%= @user -%>/<%= @name -%>_env/bin/activate
   python test_project/manage.py runserver 0.0.0.0:8000 --settings=helloapp.settings
 EOT
 end script
