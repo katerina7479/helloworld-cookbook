@@ -1,23 +1,28 @@
-python_virtualenv '/home/vagrant/hello_env' do
-  owner 'vagrant'
-  group 'vagrant'
-  action :create
-end
 
-bash 'install app dependancies' do
-  code '/home/vagrant/hello_env/bin/pip install -r requirements.txt'
-  cwd '/vagrant'
-  user 'vagrant'
-end
+node[:app][:python_apps].each do |app|
+    virtual_env_path = "/home/vagrant/#{app['name']}_env"
+    python_virtualenv virtual_env_path do
+        owner app.user
+        group app.group
+        action :create
+    end
 
-bash 'install app package' do
-  code '/home/vagrant/hello_env/bin/django-admin.py startproject test_project || echo "test_project already created"'
-  cwd '/vagrant'
-  user 'vagrant'
-end
+    bash "install app_#{app['name']}" do
+      code "#{virtual_env_path}/bin/pip install -r requirements.txt"
+      cwd app.base_dir
+      user app.user
+    end
 
-bash 'install app package' do
-  code '/home/vagrant/hello_env/bin/python setup.py develop'
-  cwd '/vagrant'
-  user 'vagrant'
+    bash "start project_#{app['name']}" do
+      code "#{virtual_env_path}/bin/django-admin.py startproject test_project"
+      ignore_failure true
+      cwd app.base_dir
+      user app.user
+    end
+
+    bash "setup project_#{app['name']}" do
+      code "#{virtual_env_path}/bin/python setup.py develop"
+      cwd app.base_dir
+      user app.user
+    end
 end

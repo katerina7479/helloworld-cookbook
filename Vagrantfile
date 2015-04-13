@@ -76,34 +76,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # config.berkshelf.except = []
 
   config.vm.provision :chef_solo do |chef|
-    chef.json = {
-      app: {
-        inits: {
-            helloworld: {
-                start_on: 'vagrant-mounted',
-                user: 'vagrant',
-                app_path: '/vagrant',
-                virtual_env_path: '/home/vagrant/hello_env'
-            }
-        },
-        sites: [
-            { name: 'test',
-              variables: {
-                port: 80,
-                hostname: 'localhost',
-                root: '/vagrant/'
-              }
-            }
-        ]
-      }
-    }
-
-    chef.run_list = [
-      'recipe[nginx]',
-      'recipe[python]',
-      'recipe[helloworld::nginx_sites]',
-      'recipe[helloworld::python_envs]',
-      'recipe[helloworld::upstarts]',
-    ]
+    chef.roles_path = 'test_fixtures'
+    chef.add_role 'role'
   end
 end

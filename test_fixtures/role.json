@@ -1,0 +1,43 @@
+{
+  "name": "test_role",
+  "json_class": "Chef::Role",
+  "description": "Role for testing",
+  "chef_type": "role",
+
+  "default_attributes": {
+	  "app": {
+		"inits": [
+			{
+			  "name": "test",
+			  "start_on": "vagrant-mounted",
+			  "user": "vagrant",
+			  "app_path": "/vagrant"
+		    }
+	    ],
+	    "python_apps":[
+		  {
+			"name": "testapp",
+			"user": "vagrant",
+			"group": "vagrant",
+			"base_dir": "/vagrant/test_fixtures"
+		  }
+	    ],
+        "sites": [
+    	  {
+            "name": "test",
+            "variables": {
+              "port": 80,
+              "hostname": "localhost",
+              "root": "/vagrant/"
+            }
+          }
+        ]
+    }
+  },
+  "override_attributes": {},
+  "run_list": [
+	  "recipe[python]",
+	  "recipe[helloworld::python_envs]",
+	  "recipe[helloworld::upstarts]"
+  ]
+}
