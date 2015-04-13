@@ -78,6 +78,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision :chef_solo do |chef|
     chef.json = {
       app: {
+        inits: {
+            helloworld: {
+                start_on: 'vagrant-mounted',
+                user: 'vagrant',
+                app_path: '/vagrant',
+                virtual_env_path: '/home/vagrant/hello_env'
+            }
+        },
         sites: [
             { name: 'test',
               variables: {
@@ -94,7 +102,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       'recipe[nginx]',
       'recipe[python]',
       'recipe[helloworld::nginx_sites]',
-      'recipe[helloworld::python_envs]'
+      'recipe[helloworld::python_envs]',
+      'recipe[helloworld::upstarts]',
     ]
   end
 end
