@@ -11,6 +11,12 @@ bash 'install app dependancies' do
 end
 
 bash 'install app package' do
+  code '/home/vagrant/hello_env/bin/django-admin.py startproject test_project || echo "test_project already created"'
+  cwd '/vagrant'
+  user 'vagrant'
+end
+
+bash 'install app package' do
   code '/home/vagrant/hello_env/bin/python setup.py develop'
   cwd '/vagrant'
   user 'vagrant'
