@@ -9,3 +9,9 @@ bash 'install app dependancies' do
   cwd '/vagrant'
   user 'vagrant'
 end
+
+bash 'install app package' do
+  code '/home/vagrant/hello_env/bin/python setup.py develop'
+  cwd '/vagrant'
+  user 'vagrant'
+end
