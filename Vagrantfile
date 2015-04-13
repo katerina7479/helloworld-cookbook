@@ -92,7 +92,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     chef.run_list = [
       'recipe[nginx]',
-      'recipe[helloworld::nginx_sites]'
+      'recipe[python]',
+      'recipe[helloworld::nginx_sites]',
+      'recipe[helloworld::python_envs]'
     ]
   end
 end
