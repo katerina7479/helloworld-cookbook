@@ -8,6 +8,6 @@ chdir <%= @app_path %>
 script
 /bin/bash <<'EOT'
   source /home/<%= @user -%>/<%= @name -%>_env/bin/activate
-  python test_project/manage.py runserver 0.0.0.0:8000 --settings=<% @name -%>.settings
+  python test_project/manage.py runserver 0.0.0.0:8000 --settings=<%= @name -%>.settings
 EOT
 end script
