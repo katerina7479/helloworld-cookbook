@@ -9,6 +9,7 @@ node[:app][:inits].each do |app|
     end
 
     service "#{app['name']}" do
+      provider Chef::Provider::Service::Upstart
       action :start
     end
 end
